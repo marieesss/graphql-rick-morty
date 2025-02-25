@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { graphql } from '../gql';
 import { useState } from 'react';
 import { Link } from 'react-router';
+import "./style.css"
 
 const GET_CHARACTERS = graphql(`
     query GetCharacters ($page: Int!)  {
@@ -47,20 +48,27 @@ const Home = () => {
     if (data) console.log(data);
   
     return (
-        <div>
-            <div>
-            <button disabled={page <= 1} onClick={RemovePage}>previous </button>
+        <div >
+            <div className={"flexbox"}>
+            <button disabled={page <= 1} onClick={RemovePage}>previous</button>
             <p> Page : {page.toString()} </p>
             <button disabled={page >= (data?.characters?.info?.pages || 42)} onClick={AddPage} >next</button>
             </div>
+            <div className={"flexbox"}>
             {data?.characters?.results?.map((character, index)=>(
                 <div key={index} >
                     <Link to={`${character?.id}`}>
-                    <h2> {character?.name} </h2>
                     <img src={character?.image || ''} width={300} />
+                    <h2 className={"flexbox"}> {character?.name} </h2>
+
                     </Link>
                 </div>
             ))}
+            </div>
+
+            <footer className={"flexbox"}>
+              <p>By mat mat and marie ❤️</p>
+            </footer>
         </div>
     )
 }

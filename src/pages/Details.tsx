@@ -1,6 +1,8 @@
 import { useParams } from "react-router";
 import { useQuery } from '@apollo/client';
 import { graphql } from '../gql';
+import "./style.css"
+
 
 const GET_CHARACTER_DETAILS = graphql(`
   query GetCharacterDetail ($id: ID!)  {
@@ -33,17 +35,33 @@ const Details = () => {
     if (data) console.log(data);
 
   return (
-    <div>
+    <div className={"flexbox-column"}>
+    <div className={"flexbox"}>
+      <div>
       <h1>{data?.character?.name}</h1>
       <img src={data?.character?.image ||""} width={300} />
+
+      </div>
+      
+    </div>
+
+    <div className={"flexbox"}>
       <ul>
         <li>Gender : {data?.character?.gender} </li>
         <li>Location : {data?.character?.location?.name} </li>
         <li>Status : {data?.character?.status} </li>
         <li>Type : {data?.character?.type} </li>
       </ul>
-      
-    </div>
+      </div>
+
+
+
+
+    <footer className={"flexbox"}>
+              <p>By mat mat and marie ❤️</p>
+       </footer>
+       </div>
+
   )
 }
 
